@@ -4,16 +4,21 @@
         <title>Basic Web Page</title>
     </head>
     <body>
-        <div class="container">
-            <div class="box" id="box-1">
-            <p> BOX 1 </p>
+        <div style="text-align:center;" class="container">
+
+            <div class="inputField">
+                <input id="item-input" type="text" class="newItem"/>
+                <button id="submitButton">submit</button>
             </div>
-             <div class="box" id="box-2">
-            <p> BOX 2 </p>
+
+            <div class="loader"></div>
+
+            <div class="todoLists">
+                <div class="allItems"></div>
+                <div class="completedItems"></div>
+                <div class="incompletedItems"></div>
             </div>
-             <div class="box" id="box-3">
-            <p> BOX 3 </p>
-            </div>
+        
             <script src="script.js"> </script>
     </body>
 </html>

@@ -1,76 +1,116 @@
-let products = [
-    {name: 'iPhone', price: 900},
-    {name: 'Samsung Galaxy', price: 850},
-    {name: 'Sony Xperia', price: 700}
-];
 
 
-// function x()
-// {
-//     console.log("Hii");
-// }
+const allItemsList=document.querySelector(".allItems");
+const body=document.querySelector("body");
+const loader=document.querySelector(".loader");
+const submitButton=document.querySelector("#submitButton");
+const inputField=document.querySelector("#item-input");
+const allItemsListBody=document.createElement('ul');
+allItemsListBody.style.listStyle="none";
+let isLoading=true;
+let allLists=[];
 
-// const x=()=>{
-//     console.log("hii");
-// }
-
-
-
-//for Each
-// products.forEach((value,index)=>{
-//     console.log(value,index);
-// });
-
-//map
+//default Render
+render();
 
 
-// let x=[1,2,3,4,5];
-
-// const newArray=x.map((item)=>{
-//     return item*10;
-// })
-
-// console.log(x);
-// console.log(newArray);
-
-//2000
-
-
-const x=800;
-const filteredProducts=products.filter((product)=>{
-    return product.price<=x;
-})
-
-console.log(products);
-console.log(filteredProducts);
-
-
-var x=100;
-var y=x;
-y=y+1;
-console.log(x);
-console.log(y);
-
-
-var person1={name:"Utkarsh",age:28};
-var person2={...person1};
-
-person2.age+=1;
-
-console.log(person1.age);
-console.log(person2.age);
+fetch("https://jsonplaceholder.typicode.com/todos")
+.then(response=>response.json())
+.then(data=>{
+    isLoading=false;
+   allLists=[...data];
+   removeLoader();
+   render();
+});
 
 
 
-let products = [
-    {name: 'iPhone', price: 900},
-    {name: 'Samsung Galaxy', price: 850},
-    {name: 'Sony Xperia', price: 700}
-];
 
-let allNames=products.reduce((acc,product)=>{
-    acc.push(product.name);
-    return acc;
-},[])
+function render()
+{
+    if(isLoading)
+    {
+        showLoader();
+    }
+    else
+    {
+        showData();
+    }
+}
 
-console.log(allNames);
+function handleAddItem()
+{
+    //create a new TodoItem
+    const newItem= {
+        userId: revisedRandId(),
+        id: revisedRandId(),
+        title:inputField.value,
+        completed:false
+      }
+
+      allItemsListBody.appendChild(createListItem(newItem.title,newItem.completed));
+      allLists.push(newItem);
+}
+
+function revisedRandId() {
+    return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+}
+
+
+submitButton.addEventListener("click",handleAddItem);
+
+function removeLoader()
+{
+    loader.innerHTML='';
+
+}
+
+
+function createLoader()
+{
+    const loaderElement=document.createElement('div');
+    const textNode=document.createElement('p');
+    textNode.textContent="Loading...";
+    loaderElement.appendChild(textNode);
+    return loaderElement;
+}
+
+function showLoader()
+{
+    //create a loader
+    const loaderElement=createLoader();
+    loader.appendChild(loaderElement);
+}
+
+
+function showData()
+{
+  
+
+    allLists.forEach((todoItem)=>{
+        const newListItem=createListItem(todoItem.title,todoItem.completed);
+        allItemsListBody.appendChild(newListItem);
+    });
+
+    allItemsList.appendChild(allItemsListBody);
+}
+
+
+
+function createListItem(title,completed)
+{
+    const newTodoItem=document.createElement('li');
+    newTodoItem.style='padding:5px 10px;margin:1px 1px;color:white;font-size:30px';
+    newTodoItem.style.backgroundColor=(completed)?"green":"red";
+    newTodoItem.innerHTML=`<p> ${title}</p>`;
+
+
+    return newTodoItem;
+}
+
+
+
+
+
+
+
