@@ -14,6 +14,7 @@ let allLists=[];
 render();
 
 
+
 fetch("https://jsonplaceholder.typicode.com/todos")
 .then(response=>response.json())
 .then(data=>{
@@ -28,6 +29,9 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
 function render()
 {
+    //remove existing content
+    allItemsListBody.innerHTML='';
+
     if(isLoading)
     {
         showLoader();
@@ -48,7 +52,7 @@ function handleAddItem()
         completed:false
       }
 
-      allItemsListBody.appendChild(createListItem(newItem.title,newItem.completed));
+      allItemsListBody.appendChild(createListItem(newItem.title,newItem.completed,newItem.id));
       allLists.push(newItem);
 }
 
@@ -88,21 +92,74 @@ function showData()
   
 
     allLists.forEach((todoItem)=>{
-        const newListItem=createListItem(todoItem.title,todoItem.completed);
+        const newListItem=createListItem(todoItem.title,todoItem.completed,todoItem.id);
         allItemsListBody.appendChild(newListItem);
     });
 
     allItemsList.appendChild(allItemsListBody);
 }
 
+function onMarkClick(event)
+{
+    const listId=event.srcElement.parentNode.id;
+
+    toggleBehavior(listId);
+
+}
+
+function toggleBehavior(id)
+{
+    allLists.forEach((list)=>{
+        if(list.id==id)
+        {
+            list.completed=!list.completed;
+        }
+    })
+
+    render();
+}
+
+function onDeleteClick(event)
+{
+    const listId=event.srcElement.parentNode.id;
+
+    //filter
+
+    allLists=allLists.filter((list)=>{
+        return list.id!=listId;
+    });
 
 
-function createListItem(title,completed)
+    render();
+}
+
+
+
+
+
+function createListItem(title,completed,id)
 {
     const newTodoItem=document.createElement('li');
+    newTodoItem.setAttribute("id",id);
     newTodoItem.style='padding:5px 10px;margin:1px 1px;color:white;font-size:30px';
     newTodoItem.style.backgroundColor=(completed)?"green":"red";
-    newTodoItem.innerHTML=`<p> ${title}</p>`;
+
+    const newPara=document.createElement('p');
+    newPara.textContent=title;
+
+    const button=document.createElement('button');
+    button.textContent= (completed)?"Mark as Incomplete":"Mark as Completed";
+    button.addEventListener('click',onMarkClick);
+
+    const deleteButton=document.createElement('button');
+    deleteButton.textContent= "Delete";
+    deleteButton.addEventListener('click',onDeleteClick);
+
+    newTodoItem.appendChild(newPara);
+    newTodoItem.appendChild(button);
+    newTodoItem.appendChild(deleteButton);
+
+
 
 
     return newTodoItem;
