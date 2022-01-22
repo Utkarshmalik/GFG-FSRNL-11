@@ -90,7 +90,6 @@ function showLoader()
 function showData()
 {
   
-
     allLists.forEach((todoItem)=>{
         const newListItem=createListItem(todoItem.title,todoItem.completed,todoItem.id);
         allItemsListBody.appendChild(newListItem);
@@ -171,3 +170,13 @@ function createListItem(title,completed,id)
 
 
 
+
+
+
+
+const name="Utkarsh";
+const age=27;
+
+
+
+const string=`hello my name is ${name} , i am  ${age} years old`;
