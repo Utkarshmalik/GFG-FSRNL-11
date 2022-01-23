@@ -1,0 +1,18 @@
+.user-box{
+
+    border:3px solid black;
+    display: inline-block;
+    height:300px;
+    width:300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:10px;
+}
+
+.image-box
+{
+    border:1.5px solid grey;
+    text-align: center;
+}

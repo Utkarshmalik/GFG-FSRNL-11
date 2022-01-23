@@ -1,0 +1,15 @@
+.user-list-box{
+
+}
+
+.all-users-box
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.head-box{
+    text-align: center;
+    font-size: 22px;
+}
