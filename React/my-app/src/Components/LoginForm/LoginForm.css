@@ -1,0 +1,15 @@
+.loginForm{
+    text-align: center;
+}
+
+.loginFormComponent{
+    padding:70px;
+    width:30%;
+    border:3px solid black;
+    margin: 50px auto;
+}
+
+.loginButton{
+    margin:10px;
+    width:90px;
+}
