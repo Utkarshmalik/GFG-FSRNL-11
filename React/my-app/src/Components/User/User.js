@@ -7,9 +7,9 @@ function User(props){
 
     
     const {title,firstName,lastName,picture}=userDetails;
-    const fullName=  title.toUpperCase()+" "+firstName+" "+lastName;
+    const fullName=firstName+" "+lastName;
     
-    return <div className="user-box">
+    return <div onClick={()=>props.onUserClick(userDetails)} className="user-box">
 
         <div className="image-box">
             <img src={picture} width="200px" height="200px" />
@@ -17,7 +17,7 @@ function User(props){
 
         <div className="name-box">
 
-            <h2> {fullName} </h2>
+            <h3> {fullName} </h3>
 
         </div>
 
