@@ -1,0 +1,14 @@
+.card{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;
+
+}
+
+.card-image{
+    height:200px;
+    width: 200px;;
+}

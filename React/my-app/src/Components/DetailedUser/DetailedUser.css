@@ -1,13 +1,16 @@
-.model{
-    height:80vh;
-    width:80vw;
+.modal{
+    height:60vh;
+    width:60vw;
     border:6px solid black;
     position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
     top:50%;
     left:50%;
-    background-color:rgba(211, 211, 211, 0.5);
-    z-index:5;
     transform: translate(-50%,-50%);
-
   
+}
+
+.modal-body{
+    text-align: center;
+
 }

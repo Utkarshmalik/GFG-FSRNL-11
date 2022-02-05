@@ -21,6 +21,7 @@ class UsersList extends React.Component
 
   onModelClose()
   {
+      console.log("on model closr");
     this.setState({isModelOpen:false});
   }
 

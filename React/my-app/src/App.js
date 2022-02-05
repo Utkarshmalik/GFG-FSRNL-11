@@ -18,8 +18,7 @@ class App extends Component{
 
 
 
-
-  onLogin(email,password)
+   onLogin(email,password)
   {
     const user={email,password};
 
