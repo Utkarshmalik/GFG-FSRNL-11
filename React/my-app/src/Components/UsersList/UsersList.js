@@ -1,56 +1,63 @@
 import React from 'react';
+import {useState} from 'react';
 import User from '../User/User';
 import './UsersList.css';
 import Spinner from '../Common/Spinner';
 import DetailedUser from '../DetailedUser/DetailedUser';
 
 
-class UsersList extends React.Component
-{
-    constructor()
-    {
-        super();
-        this.state={isModelOpen:false,clickedUserDetails:null}
 
-    }
+ 
 
-  onUserClick(user)
-  {
-      this.setState({isModelOpen:true,clickedUserDetails:user});
-  }
 
-  onModelClose()
-  {
-      console.log("on model closr");
-    this.setState({isModelOpen:false});
-  }
+function UsersList(props){
 
- showUsers()
- {
-     return this.props.usersData.map((user)=>{
-         return <div> <User  onUserClick={this.onUserClick.bind(this)}  userDetails={user}  /> </div>
-     });
- }
-
+    const {onUserClick,showUsers,onModelClose,isModelOpen,clickedUserDetails}=useUserListHook();
   
-
-    render(){
     return <div className="user-list-box" >
+          <div className="all-users-box">
+           { 
+            (!props.usersData)?
+             <Spinner/>:
+              showUsers(props.usersData) 
+             }
+             </div>
+             {
+                 isModelOpen && 
+                 <DetailedUser  userDetails={clickedUserDetails}  onModelClose={onModelClose} /> 
+             }
+     </div>
+}
 
-        <div className="all-users-box">
-        { 
-        (!this.props.usersData)?
-        <Spinner/>:
-        this.showUsers() 
-        }
-        </div>
-        {
-            this.state.isModelOpen && 
-            <DetailedUser  userDetails={this.state.clickedUserDetails}  onModelClose={this.onModelClose.bind(this)} />
-        
-        }
-    </div>
-    }
+
+
+function useUserListHook()
+{
+    const [isModelOpen,isModelOpenChange]=useState(false);
+    const [clickedUserDetails,clickedUserDetailsChange]=useState(null);
+
+
+    const  onUserClick=(user)=>
+    { 
+       isModelOpenChange(true);
+       clickedUserDetailsChange(user);
+     }
+ 
+     
+     const showUsers=(usersData)=>
+     {
+      return usersData.map((user)=>{
+          return <div> <User  onUserClick={onUserClick}  userDetails={user}  /> </div>
+      });
+     }
+ 
+  const onModelClose=()=>
+   {
+     isModelOpenChange(false);
+   }
+
+   return {onUserClick,showUsers,onModelClose,isModelOpen,clickedUserDetails};
+
 }
 
 

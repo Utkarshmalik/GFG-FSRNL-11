@@ -4,24 +4,14 @@ import './DetailedUserComponent.css';
 import Spinner from '../Common/Spinner';
 
 
-class ModelComp extends React.Component 
+ function  ModelComp(props)
 {
-    constructor()
-    {
-        super();
-
-    }
-
-  
-
-    render(){
-        console.log(this.props);
-
-        const {firstName,lastName,picture,gender,email,dateofbirth,phone}=this.props.user;
+        const {firstName,lastName,picture,gender,email,dateofbirth,phone}=props.user;
     return (
      <div>
       <Card className="card" >
-  <Card.Img className="card-image" variant="top" src={picture} />
+   
+   <Card.Img className="card-image" variant="top" src={picture} />
   <Card.Body>
     <Card.Title> {firstName+ " "+lastName}</Card.Title>
     <Card.Text>
@@ -29,8 +19,6 @@ class ModelComp extends React.Component
      <p>{email}</p>
      <p>{gender}</p>
      <p>{phone}</p>
-
-
     </Card.Text>
     <Button variant="primary">Refer</Button>
   </Card.Body>
@@ -38,7 +26,6 @@ class ModelComp extends React.Component
 
   </div>
   );
-  }
 }
 
 export default ModelComp;
