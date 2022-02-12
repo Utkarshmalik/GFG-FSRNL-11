@@ -6,6 +6,7 @@ import Spinner from '../Common/Spinner';
 
  function  ModelComp(props)
 {
+  console.log(props);
         const {firstName,lastName,picture,gender,email,dateofbirth,phone}=props.user;
     return (
      <div>
